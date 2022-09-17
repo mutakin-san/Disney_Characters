@@ -8,16 +8,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.mutakinngoding.disneycharacters.core.data.Resource
 import com.mutakinngoding.disneycharacters.core.presentation.MainViewModel
-import com.mutakinngoding.disneycharacters.core.presentation.ViewModelFactory
 import com.mutakinngoding.disneycharacters.databinding.ActivityMainBinding
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    @Inject
-    lateinit var factory: ViewModelFactory
-    private val viewModel: MainViewModel by viewModels {
-        factory
-    }
+    private val viewModel: MainViewModel by viewModels()
 
 
     private val binding: ActivityMainBinding by lazy {
@@ -26,7 +22,6 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as DisneyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
 
         setContentView(binding.root)
