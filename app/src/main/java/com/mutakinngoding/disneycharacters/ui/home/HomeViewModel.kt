@@ -1,4 +1,4 @@
-package com.mutakinngoding.disneycharacters.core.presentation
+package com.mutakinngoding.disneycharacters.ui.home
 
 import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel
@@ -7,10 +7,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(
-    characterUseCase: CharacterUseCase
-) : ViewModel() {
+class HomeViewModel @Inject constructor(useCase: CharacterUseCase) : ViewModel() {
 
-    val listCharacter = LiveDataReactiveStreams.fromPublisher(characterUseCase.getAllCharacter())
-
+    val listCharacter =  LiveDataReactiveStreams.fromPublisher(useCase.getAllCharacter())
 }

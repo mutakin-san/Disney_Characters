@@ -6,7 +6,7 @@ import com.mutakinngoding.disneycharacters.core.data.source.remote.response.ApiR
 import com.mutakinngoding.disneycharacters.core.data.source.remote.response.CharacterDTO
 import com.mutakinngoding.disneycharacters.core.domain.entity.Character
 import com.mutakinngoding.disneycharacters.core.domain.repository.IDisneyCharactersRepository
-import com.mutakinngoding.disneycharacters.utils.DataMapper
+import com.mutakinngoding.disneycharacters.core.utils.DataMapper
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

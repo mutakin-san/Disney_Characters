@@ -1,48 +1,41 @@
 package com.mutakinngoding.disneycharacters
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import android.widget.ArrayAdapter
-import androidx.activity.viewModels
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
-import com.mutakinngoding.disneycharacters.core.data.Resource
-import com.mutakinngoding.disneycharacters.core.presentation.MainViewModel
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.mutakinngoding.disneycharacters.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-    private val viewModel: MainViewModel by viewModels()
 
+    private lateinit var binding: ActivityMainBinding
 
-    private val binding: ActivityMainBinding by lazy {
-        ActivityMainBinding.inflate(layoutInflater)
-    }
-
-    @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.listCharacter.observe(this) { response ->
-            when (response) {
-                is Resource.Loading -> Log.d("Fetch Data", "Loading...")
-                is Resource.Error -> Log.e("Fetch Data", "Error : ${response.message}")
-                is Resource.Success -> {
-                    Log.i("Fetch Data", response.data.toString())
-                    binding.lvCharacters.adapter = ArrayAdapter(
-                        this,
-                        android.R.layout.simple_list_item_1,
-                        response.data.orEmpty().map {
-                            it.name
-                        },
-                    )
-                }
-            }
-        }
+        val navView: BottomNavigationView = binding.navView
 
-
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
+        val navController = navHostFragment.navController
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home, R.id.navigation_favorite
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
     }
 }

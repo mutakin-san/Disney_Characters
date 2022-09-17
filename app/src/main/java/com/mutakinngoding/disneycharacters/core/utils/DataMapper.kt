@@ -1,4 +1,4 @@
-package com.mutakinngoding.disneycharacters.utils
+package com.mutakinngoding.disneycharacters.core.utils
 
 import com.mutakinngoding.disneycharacters.core.data.source.local.model.CharacterModel
 import com.mutakinngoding.disneycharacters.core.data.source.remote.response.CharacterDTO
