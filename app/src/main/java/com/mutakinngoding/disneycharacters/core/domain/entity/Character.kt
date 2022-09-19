@@ -1,5 +1,9 @@
 package com.mutakinngoding.disneycharacters.core.domain.entity
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Character (
     val id: Int,
     val name: String,
@@ -9,5 +13,6 @@ data class Character (
     val films: List<String>,
     val sourceUrl: String,
     val parkAttractions: List<String>,
-    val videoGames: List<String>
-)
+    val videoGames: List<String>,
+    val isFavorite : Boolean
+): Parcelable

@@ -21,5 +21,5 @@ interface DisneyCharactersDao {
     fun insertCharacter(characters: List<CharacterModel>): Completable
 
     @Update
-    fun updateFavoriteCharacter(character: CharacterModel)
+    fun updateFavoriteCharacter(character: CharacterModel): Completable
 }

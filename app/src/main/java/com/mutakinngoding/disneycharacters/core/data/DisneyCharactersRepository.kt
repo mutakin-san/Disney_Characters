@@ -7,6 +7,7 @@ import com.mutakinngoding.disneycharacters.core.data.source.remote.response.Char
 import com.mutakinngoding.disneycharacters.core.domain.entity.Character
 import com.mutakinngoding.disneycharacters.core.domain.repository.IDisneyCharactersRepository
 import com.mutakinngoding.disneycharacters.core.utils.DataMapper
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -49,9 +50,9 @@ class DisneyCharactersRepository @Inject constructor(
         }
     }
 
-    override fun setFavoriteCharacter(character: Character, state: Boolean) {
+    override fun setFavoriteCharacter(character: Character, state: Boolean): Completable {
         val characterModel = DataMapper.mapEntityToModel(character)
-        localDataSource.setFavoriteCharacter(characterModel, state)
+        return localDataSource.setFavoriteCharacter(characterModel, state)
     }
 
 }

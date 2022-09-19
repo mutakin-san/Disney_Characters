@@ -11,6 +11,8 @@ import com.mutakinngoding.disneycharacters.databinding.CharacterItemLayoutBindin
 
 class CharactersAdapter : ListAdapter<Character, CharactersAdapter.ViewHolder>(diffUtilCallback) {
 
+    lateinit var onItemClickListener: (Character) -> Unit
+
     inner class ViewHolder(private val binding: CharacterItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(character: Character){
             with(binding) {
@@ -29,7 +31,12 @@ class CharactersAdapter : ListAdapter<Character, CharactersAdapter.ViewHolder>(d
         val view =
             CharacterItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return ViewHolder(view)
+        val viewHolder = ViewHolder(view).apply {
+            itemView.setOnClickListener {
+                onItemClickListener(currentList[adapterPosition])
+            }
+        }
+        return viewHolder
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -43,7 +50,7 @@ class CharactersAdapter : ListAdapter<Character, CharactersAdapter.ViewHolder>(d
             }
 
             override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
-                return oldItem.id == newItem.id
+                return (oldItem.id == newItem.id)
             }
 
         }

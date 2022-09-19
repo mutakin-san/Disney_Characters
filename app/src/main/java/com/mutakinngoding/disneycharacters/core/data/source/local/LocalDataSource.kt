@@ -2,6 +2,7 @@ package com.mutakinngoding.disneycharacters.core.data.source.local
 
 import com.mutakinngoding.disneycharacters.core.data.source.local.model.CharacterModel
 import com.mutakinngoding.disneycharacters.core.data.source.local.room.DisneyCharactersDao
+import io.reactivex.Completable
 import io.reactivex.Flowable
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -20,9 +21,9 @@ class LocalDataSource @Inject constructor(private val disneyCharactersDao: Disne
     fun insertCharacter(characterList: List<CharacterModel>) =
         disneyCharactersDao.insertCharacter(characterList)
 
-    fun setFavoriteCharacter(character: CharacterModel, newState: Boolean) {
+    fun setFavoriteCharacter(character: CharacterModel, newState: Boolean): Completable {
         character.isFavorite = newState
-        disneyCharactersDao.updateFavoriteCharacter(character)
+        return disneyCharactersDao.updateFavoriteCharacter(character)
     }
 
 }

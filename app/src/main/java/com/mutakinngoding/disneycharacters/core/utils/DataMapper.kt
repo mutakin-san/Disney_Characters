@@ -16,7 +16,8 @@ object DataMapper {
                 films = it.films,
                 sourceUrl = it.sourceUrl,
                 parkAttractions = it.parkAttractions,
-                videoGames = it.videoGames
+                videoGames = it.videoGames,
+                isFavorite = it.isFavorite
             )
         }
     }
