@@ -11,10 +11,12 @@ buildscript {
     ext.dagger_version = "2.43.2"
     ext.logging_version = "5.0.0-alpha.9"
     ext.hilt_version = "2.43.2"
+    ext.nav_version = "2.5.2"
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.10"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
 
