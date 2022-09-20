@@ -1,15 +1,18 @@
 package com.mutakinngoding.disneycharacters.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mutakinngoding.disneycharacters.core.data.Resource
 import com.mutakinngoding.disneycharacters.databinding.FragmentHomeBinding
+import com.mutakinngoding.disneycharacters.ui.adapter.CharactersAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +21,7 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val homeViewModel : HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,7 +29,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -34,32 +36,43 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = CharactersAdapter()
-        binding.characterList.adapter = adapter
-        binding.characterList.layoutManager = GridLayoutManager(requireActivity(), 2)
+        if (activity != null) {
 
-        homeViewModel.listCharacter.observe(viewLifecycleOwner) {
-            when(it) {
-                is Resource.Error -> {
-                   showLoading(false)
-                    showError(true)
+            val charactersAdapter = CharactersAdapter().apply {
+                onItemClickListener = {
+                    val action = HomeFragmentDirections.actionNavigationHomeToDetailActivity(it)
+                    view.findNavController().navigate(action)
                 }
-                is Resource.Loading -> {
-                    showLoading(true)
-                    showError(false)
-                }
-                is Resource.Success -> {
-                    adapter.submitList(it.data)
-                    showLoading(false)
-                    showError(false)
+            }
+
+            with(binding.characterList) {
+                adapter = charactersAdapter
+                layoutManager = GridLayoutManager(requireContext(), 2)
+            }
+
+            homeViewModel.listCharacter.observe(viewLifecycleOwner) { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        charactersAdapter.submitList(response.data)
+                        showLoading(false)
+                        showError(false)
+                    }
+                    is Resource.Error -> {
+                        binding.tvErrorMessage.text = response.message
+                        showError(true)
+                    }
+                    is Resource.Loading -> {
+                        showLoading(true)
+                    }
                 }
             }
         }
+
+
     }
 
     private fun showError(isVisible: Boolean) {
         binding.tvErrorMessage.isVisible = isVisible
-        binding.characterList.isVisible = !isVisible
     }
 
     private fun showLoading(isVisible: Boolean) {
