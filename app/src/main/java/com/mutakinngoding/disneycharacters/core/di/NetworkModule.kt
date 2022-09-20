@@ -12,11 +12,13 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     @Provides
+    @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         val loggingInterceptor =
             HttpLoggingInterceptor()
@@ -33,6 +35,7 @@ class NetworkModule {
 
 
     @Provides
+    @Singleton
     fun provideApiService(client: OkHttpClient): DisneyCharactersService {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.disneyapi.dev/")
