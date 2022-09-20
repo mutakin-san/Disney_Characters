@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mutakinngoding.disneycharacters.databinding.FragmentFavoriteBinding
-import com.mutakinngoding.disneycharacters.ui.home.CharactersAdapter
+import com.mutakinngoding.disneycharacters.ui.adapter.CharactersAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
