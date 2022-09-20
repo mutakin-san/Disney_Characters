@@ -7,7 +7,6 @@ import com.mutakinngoding.disneycharacters.core.data.source.remote.response.Char
 import com.mutakinngoding.disneycharacters.core.domain.entity.Character
 import com.mutakinngoding.disneycharacters.core.domain.repository.IDisneyCharactersRepository
 import com.mutakinngoding.disneycharacters.core.utils.DataMapper
-import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

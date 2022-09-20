@@ -26,6 +26,7 @@ class DatabaseModule {
     }
 
 
+    @Singleton
     @Provides
     fun provideDao(database: DisneyDatabase) : DisneyCharactersDao {
         return database.disneyCharactersDao()
