@@ -12,7 +12,6 @@ import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class RemoteDataSource @Inject constructor(private val disneyCharactersService: DisneyCharactersService) {
     @SuppressLint("CheckResult")
     fun getAllCharacters(): Flowable<ApiResponse<List<CharacterDTO>>> {

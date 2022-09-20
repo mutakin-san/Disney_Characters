@@ -18,7 +18,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     @Provides
-    @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         val loggingInterceptor =
             HttpLoggingInterceptor()
@@ -35,7 +34,6 @@ class NetworkModule {
 
 
     @Provides
-    @Singleton
     fun provideApiService(client: OkHttpClient): DisneyCharactersService {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://api.disneyapi.dev/")

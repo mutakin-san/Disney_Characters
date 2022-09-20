@@ -7,7 +7,6 @@ import io.reactivex.Flowable
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
 class LocalDataSource @Inject constructor(private val disneyCharactersDao: DisneyCharactersDao) {
 
     fun getAllCharacters(): Flowable<List<CharacterModel>> {
