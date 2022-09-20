@@ -16,7 +16,7 @@ class CharacterInteractor @Inject constructor(private val repository: IDisneyCha
         return repository.getFavoriteCharacters()
     }
 
-    override fun setFavoriteCharacter(character: Character, state: Boolean): Completable {
-        return repository.setFavoriteCharacter(character, state)
+    override fun setFavoriteCharacter(character: Character, state: Boolean) {
+        repository.setFavoriteCharacter(character, state)
     }
 }

@@ -9,6 +9,7 @@ import com.mutakinngoding.disneycharacters.core.domain.repository.IDisneyCharact
 import com.mutakinngoding.disneycharacters.core.utils.DataMapper
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -50,9 +51,12 @@ class DisneyCharactersRepository @Inject constructor(
         }
     }
 
-    override fun setFavoriteCharacter(character: Character, state: Boolean): Completable {
+    override fun setFavoriteCharacter(character: Character, state: Boolean) {
         val characterModel = DataMapper.mapEntityToModel(character)
-        return localDataSource.setFavoriteCharacter(characterModel, state)
+        localDataSource.setFavoriteCharacter(characterModel, state)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
     }
 
 }

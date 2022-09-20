@@ -8,5 +8,5 @@ import io.reactivex.Completable
 abstract class CharacterUseCase {
     abstract fun getAllCharacter(): Flowable<Resource<List<Character>>>
     abstract fun getFavoriteCharacter(): Flowable<List<Character>>
-    abstract fun setFavoriteCharacter(character: Character, state: Boolean) : Completable
+    abstract fun setFavoriteCharacter(character: Character, state: Boolean)
 }

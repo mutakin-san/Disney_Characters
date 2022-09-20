@@ -8,5 +8,5 @@ import io.reactivex.Flowable
 interface IDisneyCharactersRepository {
     fun getAllCharacters(): Flowable<Resource<List<Character>>>
     fun getFavoriteCharacters() : Flowable<List<Character>>
-    fun setFavoriteCharacter(character: Character, state: Boolean) : Completable
+    fun setFavoriteCharacter(character: Character, state: Boolean)
 }
