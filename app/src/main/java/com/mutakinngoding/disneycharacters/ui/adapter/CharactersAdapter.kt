@@ -9,12 +9,13 @@ import com.bumptech.glide.Glide
 import com.mutakinngoding.disneycharacters.core.domain.entity.Character
 import com.mutakinngoding.disneycharacters.databinding.CharacterItemLayoutBinding
 
-class CharactersAdapter : ListAdapter<Character, CharactersAdapter.ViewHolder>(diffUtilCallback) {
+class CharactersAdapter : ListAdapter<Character, CharactersAdapter.ViewHolder>(DiffUtilCallback()) {
 
     lateinit var onItemClickListener: (Character) -> Unit
 
-    inner class ViewHolder(private val binding: CharacterItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(character: Character){
+    inner class ViewHolder(private val binding: CharacterItemLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(character: Character) {
             with(binding) {
                 Glide
                     .with(binding.root.context)
@@ -43,17 +44,16 @@ class CharactersAdapter : ListAdapter<Character, CharactersAdapter.ViewHolder>(d
         holder.bind(currentList[position])
     }
 
-    companion object {
-        private val diffUtilCallback = object : DiffUtil.ItemCallback<Character>() {
-            override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
-                return oldItem == newItem
-            }
-
-            override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
-                return (oldItem.id == newItem.id)
-            }
-
+    class DiffUtilCallback : DiffUtil.ItemCallback<Character>() {
+        override fun areContentsTheSame(oldItem: Character, newItem: Character): Boolean {
+            return oldItem == newItem
         }
+
+        override fun areItemsTheSame(oldItem: Character, newItem: Character): Boolean {
+            return (oldItem.id == newItem.id) || (oldItem.isFavorite == newItem.isFavorite)
+        }
+
+
     }
 
 
