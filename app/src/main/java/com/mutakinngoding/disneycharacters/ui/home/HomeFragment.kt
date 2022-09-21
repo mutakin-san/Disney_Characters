@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.mutakinngoding.disneycharacters.core.data.Resource
 import com.mutakinngoding.disneycharacters.databinding.FragmentHomeBinding
-import com.mutakinngoding.disneycharacters.ui.adapter.CharactersAdapter
+import com.mutakinngoding.disneycharacters.core.ui.adapter.CharactersAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

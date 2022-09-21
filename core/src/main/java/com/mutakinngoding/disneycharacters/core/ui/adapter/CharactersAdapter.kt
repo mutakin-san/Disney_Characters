@@ -1,4 +1,4 @@
-package com.mutakinngoding.disneycharacters.ui.adapter
+package com.mutakinngoding.disneycharacters.core.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.mutakinngoding.disneycharacters.core.databinding.CharacterItemLayoutBinding
 import com.mutakinngoding.disneycharacters.core.domain.entity.Character
-import com.mutakinngoding.disneycharacters.databinding.CharacterItemLayoutBinding
 
 class CharactersAdapter : ListAdapter<Character, CharactersAdapter.ViewHolder>(DiffUtilCallback()) {
 

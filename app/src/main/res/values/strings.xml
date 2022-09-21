@@ -3,7 +3,6 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_favorite">Favorite</string>
-    <string name="character_picture">Character Picture</string>
     <string name="title_activity_detail">Detail Activity</string>
     <string name="no_data">Data Empty</string>
     <string name="fav_button_label">Favorite Button</string>

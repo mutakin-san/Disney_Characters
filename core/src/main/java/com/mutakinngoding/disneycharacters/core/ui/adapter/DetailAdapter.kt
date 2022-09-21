@@ -1,4 +1,4 @@
-package com.mutakinngoding.disneycharacters.ui.adapter
+package com.mutakinngoding.disneycharacters.core.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View

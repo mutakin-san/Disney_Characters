@@ -1,6 +1,6 @@
 package com.mutakinngoding.disneycharacters.core.di
 
-import com.mutakinngoding.disneycharacters.BuildConfig
+import com.mutakinngoding.disneycharacters.core.BuildConfig
 import com.mutakinngoding.disneycharacters.core.data.source.remote.network.DisneyCharactersService
 import dagger.Module
 import dagger.Provides

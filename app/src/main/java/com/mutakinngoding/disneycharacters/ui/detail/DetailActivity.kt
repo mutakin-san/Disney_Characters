@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.mutakinngoding.disneycharacters.R
 import com.mutakinngoding.disneycharacters.core.domain.entity.Character
 import com.mutakinngoding.disneycharacters.databinding.ActivityDetailBinding
-import com.mutakinngoding.disneycharacters.ui.adapter.DetailAdapter
+import com.mutakinngoding.disneycharacters.core.ui.adapter.DetailAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
