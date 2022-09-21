@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.WindowCompat
 import androidx.navigation.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.mutakinngoding.disneycharacters.R
 import com.mutakinngoding.disneycharacters.core.domain.entity.Character
 import com.mutakinngoding.disneycharacters.databinding.ActivityDetailBinding
+import com.mutakinngoding.disneycharacters.ui.adapter.DetailAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +22,12 @@ class DetailActivity : AppCompatActivity() {
     private val args: DetailActivityArgs by navArgs()
     private val detailViewModel: DetailViewModel by viewModels()
 
+    private val rvTvShowsAdapter = DetailAdapter()
+    private val rvFilmsAdapter = DetailAdapter()
+    private val rvShortFilmsAdapter = DetailAdapter()
+    private val rvPAttractionsAdapter = DetailAdapter()
+    private val rvVideoGamesAdapter = DetailAdapter()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
@@ -27,11 +35,13 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = args.character.name
 
         showDetailCharacter(args.character)
-
+        initRecyclerView()
 
     }
 
@@ -46,8 +56,8 @@ class DetailActivity : AppCompatActivity() {
 
 
 
-    private fun showDetailCharacter(character: Character) {
-        character.let {
+    private fun showDetailCharacter(character: Character?) {
+        character?.let {
             Glide.with(this@DetailActivity)
                 .load(it.imageUrl)
                 .into(binding.ivDetailImage)
@@ -59,7 +69,38 @@ class DetailActivity : AppCompatActivity() {
                 detailViewModel.setFavoriteCharacter(character, statusFavorite)
                 setStatusFavorite(statusFavorite)
             }
+
+
+            rvTvShowsAdapter.submitList(it.tvShows)
+            rvFilmsAdapter.submitList(it.films)
+            rvShortFilmsAdapter.submitList(it.shortFilms)
+            rvPAttractionsAdapter.submitList(it.parkAttractions)
+            rvVideoGamesAdapter.submitList(it.videoGames)
+
         }
+    }
+
+    private fun initRecyclerView() {
+        with(binding) {
+            rvTvShows.layoutManager = LinearLayoutManager(this@DetailActivity)
+            rvFilms.layoutManager = LinearLayoutManager(this@DetailActivity)
+            rvShortFilms.layoutManager = LinearLayoutManager(this@DetailActivity)
+            rvPAttractions.layoutManager = LinearLayoutManager(this@DetailActivity)
+            rvVideoGames.layoutManager = LinearLayoutManager(this@DetailActivity)
+
+            rvTvShows.adapter = rvTvShowsAdapter
+            rvFilms.adapter = rvFilmsAdapter
+            rvShortFilms.adapter = rvShortFilmsAdapter
+            rvPAttractions.adapter = rvPAttractionsAdapter
+            rvVideoGames.adapter = rvVideoGamesAdapter
+
+            rvTvShows.setHasFixedSize(true)
+            rvFilms.setHasFixedSize(true)
+            rvShortFilms.setHasFixedSize(true)
+            rvPAttractions.setHasFixedSize(true)
+            rvVideoGames.setHasFixedSize(true)
+        }
+
     }
 
     private fun setStatusFavorite(statusFavorite: Boolean) {
