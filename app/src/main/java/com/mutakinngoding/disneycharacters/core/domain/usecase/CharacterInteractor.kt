@@ -3,7 +3,6 @@ package com.mutakinngoding.disneycharacters.core.domain.usecase
 import com.mutakinngoding.disneycharacters.core.data.Resource
 import com.mutakinngoding.disneycharacters.core.domain.entity.Character
 import com.mutakinngoding.disneycharacters.core.domain.repository.IDisneyCharactersRepository
-import io.reactivex.Flowable
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

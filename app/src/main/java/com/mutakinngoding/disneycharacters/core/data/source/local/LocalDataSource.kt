@@ -2,7 +2,6 @@ package com.mutakinngoding.disneycharacters.core.data.source.local
 
 import com.mutakinngoding.disneycharacters.core.data.source.local.model.CharacterModel
 import com.mutakinngoding.disneycharacters.core.data.source.local.room.DisneyCharactersDao
-import io.reactivex.Completable
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

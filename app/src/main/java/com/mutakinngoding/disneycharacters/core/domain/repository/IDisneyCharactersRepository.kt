@@ -2,8 +2,6 @@ package com.mutakinngoding.disneycharacters.core.domain.repository
 
 import com.mutakinngoding.disneycharacters.core.data.Resource
 import com.mutakinngoding.disneycharacters.core.domain.entity.Character
-import io.reactivex.Completable
-import io.reactivex.Flowable
 import kotlinx.coroutines.flow.Flow
 
 interface IDisneyCharactersRepository {

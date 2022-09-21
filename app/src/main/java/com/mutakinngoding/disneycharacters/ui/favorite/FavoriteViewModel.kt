@@ -1,6 +1,5 @@
 package com.mutakinngoding.disneycharacters.ui.favorite
 
-import androidx.lifecycle.LiveDataReactiveStreams
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.mutakinngoding.disneycharacters.core.domain.usecase.CharacterUseCase

@@ -7,13 +7,9 @@ import com.mutakinngoding.disneycharacters.core.data.source.remote.response.Char
 import com.mutakinngoding.disneycharacters.core.domain.entity.Character
 import com.mutakinngoding.disneycharacters.core.domain.repository.IDisneyCharactersRepository
 import com.mutakinngoding.disneycharacters.core.utils.DataMapper
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
-import javax.inject.Singleton
 
 class DisneyCharactersRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource,
