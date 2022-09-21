@@ -40,8 +40,11 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
     protected abstract fun createCall(): Flowable<ApiResponse<RequestType>>
 
     protected abstract fun saveCallResult(data: RequestType)
+
     private fun fetchFromNetwork() {
+
         val apiResponse = createCall()
+
         result.onNext(Resource.Loading(null))
         val response = apiResponse
             .subscribeOn(Schedulers.io())
@@ -50,7 +53,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
             .doOnComplete {
                 mCompositeDisposable.dispose()
             }
-            .subscribe{ response ->
+            .subscribe { response ->
                 when (response) {
                     is ApiResponse.Success -> {
                         saveCallResult(response.data)

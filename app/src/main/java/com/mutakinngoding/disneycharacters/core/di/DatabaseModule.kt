@@ -15,6 +15,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class DatabaseModule {
 
+    @Singleton
     @Provides
     fun provideDatabase(@ApplicationContext context: Context) : DisneyDatabase {
         return Room.databaseBuilder(

@@ -14,5 +14,5 @@ data class Character (
     val sourceUrl: String,
     val parkAttractions: List<String>,
     val videoGames: List<String>,
-    val isFavorite : Boolean
+    var isFavorite : Boolean = false
 ): Parcelable
