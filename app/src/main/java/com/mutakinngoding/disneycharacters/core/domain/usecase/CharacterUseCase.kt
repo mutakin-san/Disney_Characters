@@ -4,9 +4,10 @@ import com.mutakinngoding.disneycharacters.core.data.Resource
 import io.reactivex.Flowable
 import com.mutakinngoding.disneycharacters.core.domain.entity.Character
 import io.reactivex.Completable
+import kotlinx.coroutines.flow.Flow
 
 abstract class CharacterUseCase {
-    abstract fun getAllCharacter(): Flowable<Resource<List<Character>>>
-    abstract fun getFavoriteCharacter(): Flowable<List<Character>>
-    abstract fun setFavoriteCharacter(character: Character, state: Boolean)
+    abstract fun getAllCharacter(): Flow<Resource<List<Character>>>
+    abstract fun getFavoriteCharacter(): Flow<List<Character>>
+    abstract suspend fun setFavoriteCharacter(character: Character, state: Boolean)
 }

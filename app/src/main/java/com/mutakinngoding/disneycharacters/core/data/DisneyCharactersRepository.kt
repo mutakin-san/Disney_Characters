@@ -10,6 +10,8 @@ import com.mutakinngoding.disneycharacters.core.utils.DataMapper
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -18,9 +20,9 @@ class DisneyCharactersRepository @Inject constructor(
     private val localDataSource: LocalDataSource
 ) : IDisneyCharactersRepository {
 
-    override fun getAllCharacters(): Flowable<Resource<List<Character>>> {
+    override fun getAllCharacters(): Flow<Resource<List<Character>>> {
         return object : NetworkBoundResource<List<Character>, List<CharacterDTO>>() {
-            override fun loadFromDB(): Flowable<List<Character>> {
+            override fun loadFromDB(): Flow<List<Character>> {
                 return localDataSource.getAllCharacters().map {
                     DataMapper.mapModelToEntity(it)
                 }
@@ -30,31 +32,26 @@ class DisneyCharactersRepository @Inject constructor(
                 return data.isNullOrEmpty()
             }
 
-            override fun createCall(): Flowable<ApiResponse<List<CharacterDTO>>> {
+            override suspend fun createCall(): Flow<ApiResponse<List<CharacterDTO>>> {
                 return remoteDataSource.getAllCharacters()
             }
 
-            override fun saveCallResult(data: List<CharacterDTO>) {
+            override suspend fun saveCallResult(data: List<CharacterDTO>) {
                 val characterList = DataMapper.mapDTOtoModels(data)
                 localDataSource.insertCharacter(characterList)
-                    .subscribeOn(Schedulers.io())
-                    .subscribe()
             }
-        }.asFlowable()
+        }.asFlow()
     }
 
-    override fun getFavoriteCharacters(): Flowable<List<Character>> {
+    override fun getFavoriteCharacters(): Flow<List<Character>> {
         return localDataSource.getFavoriteCharacters().map {
             DataMapper.mapModelToEntity(it)
         }
     }
 
-    override fun setFavoriteCharacter(character: Character, state: Boolean) {
+    override suspend fun setFavoriteCharacter(character: Character, state: Boolean) {
         val characterModel = DataMapper.mapEntityToModel(character)
         localDataSource.setFavoriteCharacter(characterModel, state)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
     }
 
 }
