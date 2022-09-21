@@ -1,4 +1,4 @@
-package com.mutakinngoding.disneycharacters.ui.favorite
+package com.mutakinngoding.disneycharacters.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,11 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.mutakinngoding.disneycharacters.databinding.FragmentFavoriteBinding
 import com.mutakinngoding.disneycharacters.core.ui.adapter.CharactersAdapter
-import dagger.hilt.android.AndroidEntryPoint
+import com.mutakinngoding.disneycharacters.favorite.databinding.FragmentFavoriteBinding
 
-@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
 
     private val favoriteViewModel: FavoriteViewModel by viewModels()
@@ -40,10 +38,10 @@ class FavoriteFragment : Fragment() {
                 }
             }
 
-            favoriteViewModel.favoriteCharacters.observe(viewLifecycleOwner) { dataTourism ->
-                charactersAdapter.submitList(dataTourism)
+            favoriteViewModel.favoriteCharacters.observe(viewLifecycleOwner) { character ->
+                charactersAdapter.submitList(character)
                 binding.viewEmpty.root.visibility =
-                    if (dataTourism.isNotEmpty()) View.GONE else View.VISIBLE
+                    if (character.isNotEmpty()) View.GONE else View.VISIBLE
             }
 
             with(binding.rvFavCharacters) {

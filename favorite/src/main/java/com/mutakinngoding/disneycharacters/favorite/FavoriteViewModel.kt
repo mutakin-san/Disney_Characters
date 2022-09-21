@@ -1,4 +1,4 @@
-package com.mutakinngoding.disneycharacters.ui.favorite
+package com.mutakinngoding.disneycharacters.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData

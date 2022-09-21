@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "Disney Characters"
 include ':app'
 include ':core'
+include ':favorite'
