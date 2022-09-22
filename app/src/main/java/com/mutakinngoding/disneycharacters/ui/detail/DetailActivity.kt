@@ -9,26 +9,33 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.mutakinngoding.disneycharacters.DisneyApplication
 import com.mutakinngoding.disneycharacters.R
 import com.mutakinngoding.disneycharacters.core.domain.entity.Character
+import com.mutakinngoding.disneycharacters.ui.ViewModelFactory
 import com.mutakinngoding.disneycharacters.databinding.ActivityDetailBinding
 import com.mutakinngoding.disneycharacters.core.ui.adapter.DetailAdapter
-import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-@AndroidEntryPoint
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
     private val args: DetailActivityArgs by navArgs()
-    private val detailViewModel: DetailViewModel by viewModels()
 
     private val rvTvShowsAdapter = DetailAdapter()
     private val rvFilmsAdapter = DetailAdapter()
     private val rvShortFilmsAdapter = DetailAdapter()
     private val rvPAttractionsAdapter = DetailAdapter()
     private val rvVideoGamesAdapter = DetailAdapter()
+    @Inject
+    lateinit var factory: ViewModelFactory
+
+    private val detailViewModel: DetailViewModel by viewModels {
+        factory
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as DisneyApplication).appComponent.inject(this)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
 

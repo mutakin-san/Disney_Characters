@@ -1,5 +1,6 @@
 package com.mutakinngoding.disneycharacters.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,19 +10,28 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import com.mutakinngoding.disneycharacters.DisneyApplication
 import com.mutakinngoding.disneycharacters.core.data.Resource
+import com.mutakinngoding.disneycharacters.ui.ViewModelFactory
 import com.mutakinngoding.disneycharacters.databinding.FragmentHomeBinding
 import com.mutakinngoding.disneycharacters.core.ui.adapter.CharactersAdapter
-import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-@AndroidEntryPoint
 class HomeFragment : Fragment() {
+    @Inject
+    lateinit var factory: ViewModelFactory
 
+    private val homeViewModel: HomeViewModel by viewModels {
+        factory
+    }
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val homeViewModel: HomeViewModel by viewModels()
 
+    override fun onAttach(context: Context) {
+        (requireActivity().application as DisneyApplication).appComponent.inject(this)
+        super.onAttach(context)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

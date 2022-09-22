@@ -4,7 +4,9 @@ import com.mutakinngoding.disneycharacters.core.data.source.local.model.Characte
 import com.mutakinngoding.disneycharacters.core.data.source.local.room.DisneyCharactersDao
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class LocalDataSource @Inject constructor(private val disneyCharactersDao: DisneyCharactersDao) {
 
     fun getAllCharacters(): Flow<List<CharacterModel>> {

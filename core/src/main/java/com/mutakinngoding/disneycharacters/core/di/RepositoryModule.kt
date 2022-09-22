@@ -4,11 +4,8 @@ import com.mutakinngoding.disneycharacters.core.data.DisneyCharactersRepository
 import com.mutakinngoding.disneycharacters.core.domain.repository.IDisneyCharactersRepository
 import dagger.Binds
 import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 
-@Module
-@InstallIn(SingletonComponent::class)
+@Module(includes = [NetworkModule::class, DatabaseModule::class])
 abstract class RepositoryModule {
 
     @Binds
