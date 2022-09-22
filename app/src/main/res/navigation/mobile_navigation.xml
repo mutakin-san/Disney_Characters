@@ -15,6 +15,7 @@
             app:destination="@id/detailActivity" />
     </fragment>
 
+    <!--suppress AndroidDomInspection -->
     <fragment
         android:id="@+id/navigation_favorite"
         app:moduleName="favorite"
