@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="character_picture">Character Picture</string>
+    <string name="sqlite_encrypt_key">mutakinsqlitedatabase</string>
 </resources>
