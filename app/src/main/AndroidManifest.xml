@@ -13,14 +13,13 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/Theme.DisneyCharacters"
         tools:targetApi="31">
         <activity
             android:name=".ui.detail.DetailActivity"
             android:exported="false"
-            android:label="@string/title_activity_detail"
-            android:theme="@style/Theme.DisneyCharacters.NoActionBar" />
+            android:label="@string/title_activity_detail" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
